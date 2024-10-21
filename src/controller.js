@@ -10,7 +10,7 @@ const pdfParse = require('pdf-parse');
 
 //Extract text and summarize
 exports.summarizer = async function summarizer(file) {
-  console.log("Received file on server ", file);
+  // console.log("Received file on server ", file);
   // console.log("file path: ", file.path);
 
   //Extract text from PDF
@@ -18,7 +18,7 @@ exports.summarizer = async function summarizer(file) {
 
   try {
     extract = await pdfToText(file.path);
-    // console.log('File content of PDF: ', extract.text);
+    // console.log('File content of PDF: ', extract);
   }
   catch (err) {
     console.error("Error extracing text from PDF");
@@ -27,7 +27,7 @@ exports.summarizer = async function summarizer(file) {
 
 
   try {
-    const summary = await generateSummary(extract.text);
+    const summary = await generateSummary(extract);
     console.log("Summary received from Cohere ", summary);
 
     return Promise.resolve({ status: 'success', data: summary });
@@ -45,14 +45,14 @@ exports.summarizer = async function summarizer(file) {
 
 
 async function pdfToText(filePath) {
-  console.log("Extract pdf at ", filePath);
+  // console.log("Extract pdf at ", filePath);
   let readFileSync = fs.readFileSync(filePath);
   try {
     const pdfExtract = await pdfParse(readFileSync);
     // console.log('File content: ', pdfExtract.text);
     // console.log('Total pages: ', pdfExtract.numpages)
     // console.log('All content: ', pdfExtract.info)
-    return Promise.resolve(pdfExtract);
+    return Promise.resolve(pdfExtract.text);
   }
 
   catch (error) {
@@ -63,7 +63,7 @@ async function pdfToText(filePath) {
 
 async function generateSummary(textToSummarize) {
 
-  cohere.init(config.apiKey);
+  cohere.init("7J1r8Qqg4zkztMZW2dF397OnSnKKtuDT2H0Is9y8");
   try {
     const response = await cohere.summarize({
       text: textToSummarize,
@@ -74,7 +74,7 @@ async function generateSummary(textToSummarize) {
       temperature: 0.5,
     });
 
-    // console.log("Response from Cohere", response);
+    console.log("Response from Cohere", response);
     // console.log('Summary:', response.body.summary);
 
     return Promise.resolve(response.body.summary);

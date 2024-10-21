@@ -26,11 +26,12 @@ const upload = multer({ storage: storage });
 //handle upload
 router.post("/upload", upload.single('file'), (req, res) => {
   console.log("/upload");
+  // console.log("here",req.file);
   // console.log("Request object: ",req);
   // console.log("Request file ", req.file);
 
   summarizer(req.file)
-    .then((data) => {
+  .then((data) => {
       console.log("Summary object: ", data);
       res.send(data);
     })
