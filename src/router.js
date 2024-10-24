@@ -46,7 +46,7 @@ router.post("/upload", upload.single("file"), (req, res) => {
   // res.send(fileUpload(req.file));
 });
 
-// -------------------------------------------------
+// ----------------------Translator---------------------------
 
 async function pdfToText(filePath) {
   const dataBuffer = fs.readFileSync(filePath); // Use readFileSync for testing
@@ -83,7 +83,10 @@ async function translator(pdfText, targetLanguage) {
   };
 
   try {
-    let Response = await fetch("https://google-translator9.p.rapidapi.com/v2",requestOptions);
+    let Response = await fetch(
+      "https://google-translator9.p.rapidapi.com/v2",
+      requestOptions
+    );
     let data = await Response.json();
     if (data["data"]) {
       // console.log("IF:",data['data']['translations'][0]['translatedText']);
@@ -109,7 +112,7 @@ router.post("/translate", upload.single("file"), async (req, res) => {
 
     // Perform translation
     let translatedText = await translator(pdfText, targetLanguage);
-    console.log("Text translated", translatedText.substr(0,10));
+    console.log("Text translated", translatedText.substr(0, 10));
     res.send(translatedText);
   } catch (error) {
     res.status(500).send("Error extracting text from PDF");
@@ -121,4 +124,22 @@ router.get("/translate", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/translate.html"));
 });
 
+// ------------------------ Extractor ---------------------------
+router.post("/extract", upload.single("file"), async (req, res) => {
+  console.log("/extract");
+
+  const filePath = req.file.path; // Path to the uploaded file
+
+  try {
+    const pdfText = await pdfToText(filePath); // Extract text from the PDF
+    console.log("PDF text Extracted");
+    res.send(pdfText);
+  } catch (error) {
+    res.status(500).send("Error extracting text from PDF");
+  }
+});
+// Serve the Extractor page
+router.get("/extract", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/extractor.html"));
+});
 module.exports = router;

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PDF Extractor</title>
+  <link rel="stylesheet" href="styling.css" />
+</head>
+<body>
+  <header>
+    <h1>ReSearch</h1>
+  </header>
+
+  <main>
+    <form enctype="multipart/form-data" action="/extract" method="post" id="extractForm">
+      <input type="file" name="file" id="file">
+      <br><br>
+      <input type="submit" value="Translate">
+    </form>
+
+    <div id="extractDiv" class="hide"><p>Here is your translation: </p></div>
+  </main>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="extractorScript.js"></script>
+</body>
+</html>
