@@ -38,10 +38,13 @@ Select the desired operation (Extract, Summarize, or Translate).
 View the result on the screen.
 Download the summarized or translated text if needed.
 Support:
-If you encounter any issues or have questions, feel free to reach out to me at [your-email@example.com].
+If you encounter any issues or have questions, feel free to reach out to me at [chrisambatti123@gmail.com].
 
 # Future Work:
 Enhanced Error Handling: Implement more robust error handling and validation for unsupported PDF types.
 Additional Languages: Expand the translation feature to support more languages.
 Full-Text Search: Add a search functionality to help users search within the extracted text.
 
+# Images
+
+<img src="C:\Users\CHRISTOPHER\Desktop\WhatsApp Image 2024-10-25 at 00.43.27_57b40eb0.jpg" style="max-width=100%;">
