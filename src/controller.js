@@ -1,12 +1,8 @@
-
 const config = require("../config");
 
-
 const cohere = require("cohere-ai");
-const fs = require('fs');
-const pdfParse = require('pdf-parse');
-
-
+const fs = require("fs");
+const pdfParse = require("pdf-parse");
 
 //Extract text and summarize
 exports.summarizer = async function summarizer(file) {
@@ -19,30 +15,22 @@ exports.summarizer = async function summarizer(file) {
   try {
     extract = await pdfToText(file.path);
     // console.log('File content of PDF: ', extract);
-  }
-  catch (err) {
+  } catch (err) {
     console.error("Error extracing text from PDF");
-    return { status: 'failed', data: err };
+    return { status: "failed", data: err };
   }
-
 
   try {
     const summary = await generateSummary(extract);
     console.log("Summary received from Cohere ", summary);
 
-    return Promise.resolve({ status: 'success', data: summary });
-  }
-
-  catch (err) {
+    return summary;
+  } catch (err) {
     console.error("Error summarizing file ", err);
 
-    return Promise.reject({ status: 'failed', data: err });
+    return Promise.reject({ status: "failed", data: err });
   }
-
-
-
 };
-
 
 async function pdfToText(filePath) {
   // console.log("Extract pdf at ", filePath);
@@ -53,24 +41,21 @@ async function pdfToText(filePath) {
     // console.log('Total pages: ', pdfExtract.numpages)
     // console.log('All content: ', pdfExtract.info)
     return Promise.resolve(pdfExtract.text);
-  }
-
-  catch (error) {
+  } catch (error) {
     console.error("Error extracting text from PDF", error);
     return Promise.reject(error);
   }
 }
 
 async function generateSummary(textToSummarize) {
-
   cohere.init("7J1r8Qqg4zkztMZW2dF397OnSnKKtuDT2H0Is9y8");
   try {
     const response = await cohere.summarize({
       text: textToSummarize,
-      length: 'long',
-      format: 'paragraph',
-      model: 'summarize-medium',
-      additional_command: '',
+      length: "long",
+      format: "paragraph",
+      model: "summarize-medium",
+      additional_command: "",
       temperature: 0.5,
     });
 
@@ -78,17 +63,13 @@ async function generateSummary(textToSummarize) {
     // console.log('Summary:', response.body.summary);
 
     return Promise.resolve(response.body.summary);
-  }
-
-  catch (error) {
+  } catch (error) {
     console.error("Error response from Cohere API ", error);
     return Promise.reject(error);
   }
-
 }
 
-
-  // fs.writeFile(`./assets/test-extract.txt`, extract.text, (err) => {
-  //   if (err) throw err;
-  //   console.log('The file has been saved!');
-  // });
+// fs.writeFile(`./assets/test-extract.txt`, extract.text, (err) => {
+//   if (err) throw err;
+//   console.log('The file has been saved!');
+// });

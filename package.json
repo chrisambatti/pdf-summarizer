@@ -15,7 +15,9 @@
     "node": ">=10.x"
   },
   "dependencies": {
+    "@vitalets/google-translate-api": "^9.2.0",
     "body-parser": "^1.19.0",
+    "classifier": "file:",
     "cohere-ai": "^6.2.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PDF Translator</title>
+  <link rel="stylesheet" href="styling.css" />
+</head>
+<body>
+  <header>
+    <h1>ReSearch</h1>
+  </header>
+
+  <main>
+    <form enctype="multipart/form-data" action="/translate" method="post" id="translateForm">
+      <input type="file" name="file" id="file">
+      <br><br>
+      <label for="language">Choose language:</label>
+      <select name="language" id="language">
+        <option value="es">Spanish</option>
+        <option value="fr">French</option>
+        <option value="de">German</option>
+        <!-- Add more languages as needed -->
+      </select>
+      <br><br>
+      <input type="submit" value="Translate">
+    </form>
+
+    <div id="translation" class="hide"><p>Here is your translation: </p></div>
+  </main>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="translateScript.js"></script>
+</body>
+</html>

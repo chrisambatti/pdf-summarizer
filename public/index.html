@@ -3,31 +3,25 @@
 
 <head>
   <meta charset="utf-8">
-  <title>PDF Summarizer</title>
+  <title>ReSearch</title>
   <link rel="stylesheet" href="styling.css" />
 </head>
 
 <body>
   <header>
-    <h1>PDF Summarizer</h1>
+    <h1>ReSearch</h1>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <i class="fa fa-github" style="font-size:40px; text-align: right;"></i> -->
   </header>
   <main>
     
     <form enctype="multipart/form-data" action="/upload" method="post">
+      <div class="modal-body">
+        <h2 class="modal-title">Upload a file</h2>
+        <p class="modal-description">Attach the file below</p>
+        </div>
       <input type="file" name="file" id="file">
       <br>
       <br>
       <input type="submit" value="Summarize">
     </form>
-
-    <div id="summary" class="hide"><p>Here is your summary: </p></div>
-    
-  </main>
-
-
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="script.js"></script>
-
-</body>
-
-</html>
