@@ -31,7 +31,7 @@ Other Libraries: body-parser, dotenv, classifier, nodemon
 Clone this repository.
 Navigate to the project directory.
 Install dependencies by running npm install.
-Start the development server using npm run dev (for frontend) and npm run start (for backend).
+Start the development server using npm start
 # Usage:
 Upload a PDF using the provided interface.
 Select the desired operation (Extract, Summarize, or Translate).
